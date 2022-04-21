@@ -1,0 +1,13 @@
+.btnClass {
+  background-color: orangered;
+  color: #ffffff;
+  width: 180px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnClass:hover {
+  opacity: 0.3;
+}
