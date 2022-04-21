@@ -5,6 +5,7 @@ const SimpleConnect = () => {
   //states for the UI
   const [connectBtnText, setConnectBtnText] = useState('Connect Wallet');
   const [accountAddress, setAccountAddress] = useState(null);
+  const [disable, setDisable] = useState(false);
 
   const handleAccountsChanged = (newAccount) => {
     setAccountAddress(newAccount);
@@ -17,19 +18,29 @@ const SimpleConnect = () => {
         .then((result) => {
           handleAccountsChanged(result[0]);
           setConnectBtnText('Wallet Connected');
+          setDisable(true);
         });
     } else {
       swal('MetaMask not Detected', 'Please install MetaMask', 'error');
     }
   };
+
   return (
     <div>
       <h1>Simple Connect </h1>
-      <button className={styles.btnClass} onClick={connectWalletHandler}>
+      <button
+        className={styles.btnClass}
+        disabled={disable}
+        onClick={() => {
+          connectWalletHandler();
+          //   setDisable(true);
+        }}
+      >
         {connectBtnText}
       </button>
       <h3>
-        Address: <span style={{ color: 'green' }}>{accountAddress}</span>
+        Account address
+        <br /> <span style={{ color: 'green' }}>{accountAddress}</span>
       </h3>
     </div>
   );
